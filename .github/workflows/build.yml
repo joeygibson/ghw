@@ -13,6 +13,7 @@ jobs:
         config:
           - os: ubuntu-latest
           - os: macOS-latest
+          - os: windows-latest
     steps:
       - uses: actions/checkout@v2
       - name: Setup Go

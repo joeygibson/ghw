@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -x
 
+env |sort
+
 TAG=${GITHUB_REF#refs/*/v}
 ARCH=x86_64
 
