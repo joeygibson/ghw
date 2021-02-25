@@ -38,9 +38,9 @@ jobs:
         run: cargo test --verbose
       - name: Build for release
         run: cargo build --verbose --release
-      - name: Set program name
-        run: echo "PROGRAM_NAME=${GITHUB_REPOSITORY#joeygibson/}" >> $GITHUB_ENV
-        shell: bash
+      # - name: Set program name
+      #   run: echo "PROGRAM_NAME=${GITHUB_REPOSITORY#joeygibson/}" >> $GITHUB_ENV
+      #   shell: bash
       - name: Generate binary name
         run: ./scripts/generate-binary-name
         shell: bash

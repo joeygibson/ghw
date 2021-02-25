@@ -16,4 +16,5 @@ else
     OS=linux
 fi
 
+echo "PROGRAM_NAME=target/release/${PROGRAM_NAME}${EXT}" >> $GITHUB_ENV
 echo "RELEASE_NAME=${PROGRAM_NAME}-${TAG}-${ARCH}-${VENDOR}-${OS}${EXT}" >> $GITHUB_ENV
