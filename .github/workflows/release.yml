@@ -34,13 +34,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Setup Go
-        uses: actions/setup-go@v2
-        with:
-          go-version: 1.15
+      - name: Build and test
+        run: cargo test --verbose
       - name: Build for release
-        run: go build -o ${GITHUB_REPOSITORY#joeygibson/} -ldflags "-X main.sha1ver=`git rev-parse HEAD` -X main.buildTime=`date +'%Y-%m-%d_%T'` -X main.gitTag=${GITHUB_REF#refs/*/v}"
-        shell: bash
+        run: cargo build --verbose --release
       - name: Set program name
         run: echo "PROGRAM_NAME=${GITHUB_REPOSITORY#joeygibson/}" >> $GITHUB_ENV
         shell: bash
@@ -50,7 +47,7 @@ jobs:
         env: 
           OS: ${{ matrix.config.os }}
       - name: Set permissions
-        run: chmod 755 ${{ env.PROGRAM_NAME }}
+        run: chmod 755 target/release/${{ env.PROGRAM_NAME }}
         shell: bash
       - name: Upload release assets
         uses: actions/upload-release-asset@v1
@@ -59,5 +56,5 @@ jobs:
         with:
           upload_url: ${{ needs.create_release.outputs.upload_url }}
           asset_name: ${{ env.RELEASE_NAME }}
-          asset_path: ${{ env.PROGRAM_NAME }}
+          asset_path: target/release/${{ env.PROGRAM_NAME }}
           asset_content_type: application/octet-stream
