@@ -47,7 +47,7 @@ jobs:
         env: 
           OS: ${{ matrix.config.os }}
       - name: Set permissions
-        run: chmod 755 target/release/${{ env.PROGRAM_NAME }}
+        run: chmod 755 ${{ env.PROGRAM_NAME }}
         shell: bash
       - name: Upload release assets
         uses: actions/upload-release-asset@v1
